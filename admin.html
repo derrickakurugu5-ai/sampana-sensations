@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sampana Admin Panel</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://googleapis.com" rel="stylesheet">
+    <style>
+        /* Custom Overrides for the Admin panel view layout */
+        .admin-box {
+            max-width: 600px;
+            margin: 60px auto;
+            background: #121212;
+            border: 1px solid #1c1c1c;
+            padding: 30px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #d4af37;
+            margin-bottom: 8px;
+        }
+        .form-group input {
+            width: 100%;
+            background: #000;
+            border: 1px solid #1c1c1c;
+            color: #fff;
+            padding: 14px;
+            outline: none;
+            font-family: 'Montserrat', sans-serif;
+        }
+        .form-group input:focus {
+            border-color: #d4af37;
+        }
+        .code-output-box {
+            width: 100%;
+            height: 150px;
+            background: #000;
+            border: 1px solid #222;
+            color: #a5a5a5;
+            padding: 15px;
+            font-family: monospace;
+            font-size: 0.75rem;
+            margin-top: 25px;
+            white-space: pre-wrap;
+            overflow-y: auto;
+        }
+        .copy-btn {
+            background-color: #d4af37;
+            color: #000;
+            width: 100%;
+            border: none;
+            padding: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Simple Top Admin Bar -->
+    <div class="top-bar">
+        <span>Sampana Sensations Store Manager</span>
+    </div>
+
+    <div class="admin-box">
+        <h2 class="section-title" style="margin-bottom: 25px;">Add New Product</h2>
+        
+        <div class="form-group">
+            <label for="prod-name">Product Name</label>
+            <input type="text" id="prod-name" placeholder="e.g., Royal Amber">
+        </div>
+
+        <div class="form-group">
+            <label for="prod-price">Price (In GH₵)</label>
+            <input type="number" id="prod-price" placeholder="e.g., 280">
+        </div>
+
+        <div class="form-group">
+            <label for="prod-img">Product Image URL</label>
+            <input type="text" id="prod-img" placeholder="Paste image link from Unsplash, Imgur, or WhatsApp">
+        </div>
+
+        <button class="btn btn-outline" style="width: 100%; text-align: center; justify-content: center;" onclick="generateProductCode()">Generate Code Card</button>
+
+        <div id="output-section" style="display: none;">
+            <div class="code-output-box" id="code-output"></div>
+            <button class="copy-btn" onclick="copyAdminCode()">Copy Product Card Code</button>
+            <p style="font-size: 0.75rem; color: #aaaaaa; text-align: center; margin-top: 15px; line-height: 1.5;">
+                👉 **How to update live:** Copy the code card block above. Open your `index.html` file on GitHub, find the `<div class="products-grid">` section, and paste this card code right at the top of the list!
+            </p>
+        </div>
+    </div>
+
+    <script>
+        function generateProductCode() {
+            const name = document.getElementById('prod-name').value.trim();
+            const price = document.getElementById('prod-price').value.trim();
+            const img = document.getElementById('prod-img').value.trim() || 'https://unsplash.com';
+            const randomId = Math.floor(Math.random() * 10000);
+
+            if(!name || !price) {
+                alert('Please fill out the Product Name and Price fields.');
+                return;
+            }
+
+            // Create standard product layout block matching our template architecture
+            const cardCode = `<!-- Dynamic Product Card Added via Admin -->
+<div class="product-card" data-id="${randomId}" data-name="${name}" data-price="${price}">
+    <div class="product-img-holder">
+        <img src="${img}" alt="${name}">
+    </div>
+    <div class="product-details">
+        <h3>${name}</h3>
+        <p class="price">GH₵${parseFloat(price).toFixed(2)}</p>
+        <button class="add-to-cart-btn">Add To Bag</button>
+    </div>
+</div>`;
+
+            document.getElementById('code-output').innerText = cardCode;
+            document.getElementById('output-section').style.display = 'block';
+        }
+
+        function copyAdminCode() {
+            const codeText = document.getElementById('code-output').innerText;
+            navigator.clipboard.writeText(codeText).then(() => {
+                alert('Product Card Code copied successfully! Now paste it inside your index.html file layout on GitHub.');
+            });
+        }
+    </script>
+</body>
+</html>
