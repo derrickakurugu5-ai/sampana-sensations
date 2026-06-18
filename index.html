@@ -3,75 +3,121 @@
 
 <head>
 
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0"
+>
+
 <title>Sampana Sensations</title>
 
 <style>
 
-body{
-background:#090909;
-color:white;
-font-family:Arial;
+*{
 margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+
+background:#090909;
+
+color:white;
+
+font-family:Arial;
+
+}
+
+header{
+
+padding:30px;
+
+text-align:center;
+
+}
+
+.logo{
+
+font-size:40px;
+
+color:#d4af37;
+
+font-weight:bold;
+
+}
+
+.slogan{
+
+margin-top:10px;
+
+font-size:18px;
+
 }
 
 .hero{
+
 text-align:center;
-padding:60px 20px;
+
+padding:30px;
+
 }
 
-h1{
-color:#d4af37;
-font-size:42px;
-}
+.hero button{
 
-.subtitle{
-font-size:20px;
-}
+margin-top:20px;
 
-button{
-background:#d4af37;
-color:black;
+padding:15px 25px;
+
 border:none;
-padding:12px 20px;
+
+background:#d4af37;
+
+color:black;
+
 border-radius:10px;
+
 }
 
 .products{
+
+padding:20px;
 
 display:grid;
 
 grid-template-columns:
 1fr 1fr;
 
-gap:15px;
-
-padding:20px;
+gap:20px;
 
 }
 
 .card{
 
-background:#181818;
-
-padding:15px;
+background:#171717;
 
 border-radius:16px;
 
+padding:15px;
+
 }
 
-.image{
+.card img{
 
-height:180px;
-
-background:#333;
+width:100%;
 
 border-radius:12px;
 
+height:220px;
+
+object-fit:cover;
+
 }
 
-.price{
+.name{
 
-color:#d4af37;
+margin-top:12px;
 
 font-size:22px;
 
@@ -85,175 +131,236 @@ color:gray;
 
 }
 
+.price{
+
+color:#d4af37;
+
+font-size:26px;
+
+margin-top:6px;
+
+}
+
+.order{
+
+display:block;
+
+text-align:center;
+
+margin-top:12px;
+
+padding:12px;
+
+background:#d4af37;
+
+color:black;
+
+border-radius:10px;
+
+text-decoration:none;
+
+}
+
+footer{
+
+padding:30px;
+
+text-align:center;
+
+color:#888;
+
+}
+
 </style>
 
 </head>
 
 <body>
 
+<header>
+
+<div class="logo">
+
+Sampana Sensations
+
+</div>
+
+<div class="slogan">
+
+Smell Premium. Feel Premium.
+
+</div>
+
+</header>
+
+
 <div class="hero">
 
-<h1>
-Sampana Sensations
-</h1>
-
-<p class="subtitle">
-Smell Premium. Feel Premium.
-</p>
-
 <button>
+
 Shop Collection
+
 </button>
 
 </div>
+
 
 
 <div class="products">
 
 
-<div class="card">
-
-<img
-src="https://images.unsplash.com/photo-1541643600914-78b084683601"
-width="100%"
-style="border-radius:12px;"
->
-
-<h3>Midnight Oud</h3>
-
-<p>Luxury Perfume</p>
-
-<p>
-
-<span class="old">
-GH₵250
-</span>
-
-</p>
-
-<p class="price">
-GH₵220
-</p>
-
-<a href="https://wa.me/233549502786?text=Hello%20I%20want%20to%20order%20Midnight%20Oud">
-
-<a href="https://wa.me/233549502786?text=Hello%20I%20want%20to%20order%20Midnight%20Oud">
-
-<button>
-
-Order
-
-</button>
-
-</a>
-
-</a>
-
-</div>
-
 
 <div class="card">
 
 <img
 src="https://images.unsplash.com/photo-1541643600914-78b084683601"
-width="100%"
-style="border-radius:12px;"
 >
 
-<h3>Golden Splash</h3>
+<div class="name">
 
-<p>Body Splash</p>
+Midnight Oud
 
-<p>
+</div>
 
-<span class="old">
-GH₵120
-</span>
+<div class="old">
 
-</p>
+GH₵250 | $20
 
-<p class="price">
-GH₵90
-</p>
+</div>
 
-<a href="https://wa.me/233549502786?text=Hello%20I%20want%20to%20order%20Midnight%20Oud">
+<div class="price">
 
-<button>
+GH₵220 | $18
+
+</div>
+
+<a
+class="order"
+
+href="https://wa.me/233549502786?text=Hello%20I%20want%20to%20order%20Midnight%20Oud"
+>
 
 Order
-
-</button>
 
 </a>
 
 </div>
+
 
 
 
 <div class="card">
 
 <img
-src="https://images.unsplash.com/photo-1541643600914-78b084683601"
-width="100%"
-style="border-radius:12px;"
+src="https://images.unsplash.com/photo-1523293182086-7651a899d37f"
 >
 
-<h3>Royal Mist</h3>
+<div class="name">
 
-<p>Premium Fragrance</p>
+Golden Splash
 
-<p class="price">
+</div>
 
-GH₵300
+<div class="old">
 
-</p>
+GH₵120 | $10
 
-<a href="https://wa.me/233549502786?text=Hello%20I%20want%20to%20order%20Midnight%20Oud">
+</div>
 
-<button>
+<div class="price">
+
+GH₵90 | $8
+
+</div>
+
+<a
+class="order"
+
+href="https://wa.me/233549502786?text=Hello%20I%20want%20to%20order%20Golden%20Splash"
+>
 
 Order
-
-</button>
 
 </a>
 
 </div>
+
 
 
 
 <div class="card">
 
 <img
-src="https://images.unsplash.com/photo-1541643600914-78b084683601"
-width="100%"
-style="border-radius:12px;"
+src="https://images.unsplash.com/photo-1615634260167-c8cdede054de"
 >
 
-<h3>Velvet Chill</h3>
+<div class="name">
 
-<p>Fresh Collection</p>
+Royal Mist
 
-<p class="price">
+</div>
 
-GH₵180
+<div class="price">
 
-</p>
+GH₵300 | $24
 
-<a href="https://wa.me/233549502786?text=Hello%20I%20want%20to%20order%20Midnight%20Oud">
+</div>
 
-<button>
+<a
+class="order"
+
+href="https://wa.me/233549502786?text=Hello%20I%20want%20to%20order%20Royal%20Mist"
+>
 
 Order
-
-</button>
 
 </a>
 
 </div>
 
 
+
+
+<div class="card">
+
+<img
+src="https://images.unsplash.com/photo-1587017539504-67cfbddac569"
+>
+
+<div class="name">
+
+Velvet Chill
+
 </div>
+
+<div class="price">
+
+GH₵180 | $15
+
+</div>
+
+<a
+class="order"
+
+href="https://wa.me/233549502786?text=Hello%20I%20want%20to%20order%20Velvet%20Chill"
+>
+
+Order
+
+</a>
+
+</div>
+
+
+
+</div>
+
+
+<footer>
+
+© Sampana Sensations
+
+</footer>
 
 </body>
 
