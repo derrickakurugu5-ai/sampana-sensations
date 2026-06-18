@@ -3,206 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sampana Admin Panel</title>
-    <link href="https://googleapis.com" rel="stylesheet">
-    <link rel="stylesheet" href="https://cloudflare.com">
+    <title>Sampana Manager</title>
     <style>
-        /* Standalone Premium Theme Configuration */
-        body {
-            background-color: #050505;
-            color: #ffffff;
-            font-family: 'Montserrat', sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-        .top-bar {
-            background: #000;
-            color: #d4af37;
-            text-align: center;
-            padding: 12px 0;
-            font-size: 0.75rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            border-bottom: 1px solid #1c1c1c;
-            font-family: 'Cinzel', serif;
-        }
-        .admin-box {
-            max-width: 600px;
-            margin: 40px auto;
-            background: #121212;
-            border: 1px solid #1c1c1c;
-            padding: 30px;
-        }
-        .section-title {
-            font-family: 'Cinzel', serif;
-            font-size: 1.5rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            text-align: center;
-            margin-bottom: 30px;
-            color: #fff;
-        }
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 40px;
-            height: 1px;
-            background: #d4af37;
-            margin: 10px auto 0;
-        }
-        .form-group {
-            margin-bottom: 25px;
-        }
-        .form-group label {
-            display: block;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: #d4af37;
-            margin-bottom: 8px;
-            font-weight: 500;
-        }
-        .form-group input {
-            width: 100%;
-            background: #000;
-            border: 1px solid #1c1c1c;
-            color: #fff;
-            padding: 14px;
-            font-size: 0.9rem;
-            outline: none;
-            font-family: 'Montserrat', sans-serif;
-            transition: border-color 0.3s;
-        }
-        .form-group input:focus {
-            border-color: #d4af37;
-        }
-        .admin-btn {
-            width: 100%;
-            background-color: #d4af37;
-            color: #000;
-            padding: 15px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            font-size: 0.8rem;
-            border: none;
-            cursor: pointer;
-            font-family: 'Cinzel', serif;
-            transition: background 0.3s;
-        }
-        .admin-btn:hover {
-            background-color: #f3e5ab;
-        }
-        .code-output-box {
-            width: 100%;
-            height: 150px;
-            background: #000;
-            border: 1px solid #1c1c1c;
-            color: #a5a5a5;
-            padding: 15px;
-            font-family: monospace;
-            font-size: 0.75rem;
-            margin-top: 25px;
-            white-space: pre-wrap;
-            overflow-y: auto;
-        }
-        .copy-btn {
-            background: none;
-            border: 1px solid #d4af37;
-            color: #d4af37;
-            width: 100%;
-            padding: 14px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            cursor: pointer;
-            margin-top: 15px;
-            font-family: 'Cinzel', serif;
-            transition: all 0.3s;
-        }
-        .copy-btn:hover {
-            background: #d4af37;
-            color: #000;
-        }
-        .help-text {
-            font-size: 0.75rem;
-            color: #aaaaaa;
-            text-align: center;
-            margin-top: 20px;
-            line-height: 1.6;
-        }
+        body { background-color: #0b0b0b; color: #ffffff; font-family: sans-serif; padding: 20px; text-align: center; }
+        .box { max-width: 500px; margin: 30px auto; background: #141414; padding: 20px; border: 1px solid #222; }
+        input { width: 90%; padding: 12px; margin: 10px 0; background: #000; color: #fff; border: 1px solid #333; }
+        button { width: 95%; padding: 12px; background: #d4af37; color: #000; border: none; font-weight: bold; cursor: pointer; margin-top: 10px; }
+        textarea { width: 90%; height: 100px; background: #000; color: #aaa; margin-top: 15px; padding: 10px; }
     </style>
 </head>
 <body>
 
-    <div class="top-bar">
-        <span>Sampana Sensations Store Manager</span>
-    </div>
-
-    <div class="admin-box">
-        <h2 class="section-title">Add New Product</h2>
+    <h2>Sampana Store Admin</h2>
+    <div class="box">
+        <label>Product Name</label>
+        <input type="text" id="name" placeholder="e.g., Midnight Oud">
         
-        <div class="form-group">
-            <label for="prod-name">Product Name</label>
-            <input type="text" id="prod-name" placeholder="e.g., Royal Amber">
-        </div>
-
-        <div class="form-group">
-            <label for="prod-price">Price (In GH₵)</label>
-            <input type="number" id="prod-price" placeholder="e.g., 280">
-        </div>
-
-        <div class="form-group">
-            <label for="prod-img">Product Image URL</label>
-            <input type="text" id="prod-img" placeholder="Paste image link here">
-        </div>
-
-        <button class="admin-btn" onclick="generateProductCode()">Generate Card snippet</button>
-
-        <div id="output-section" style="display: none;">
-            <div class="code-output-box" id="code-output"></div>
-            <button class="copy-btn" onclick="copyAdminCode()">Copy Code Snippet</button>
-            <p class="help-text">
-                📋 **How to update live:** Copy the code block above. Go to your <code>index.html</code> file on GitHub, find your product section list, and paste it right inside to add your new perfume to your store!
-            </p>
-        </div>
+        <label>Price (GH₵)</label>
+        <input type="number" id="price" placeholder="e.g., 250">
+        
+        <label>Image URL</label>
+        <input type="text" id="img" placeholder="Paste link here">
+        
+        <button onclick="makeCard()">Generate Product Card</button>
+        
+        <textarea id="output" readonly placeholder="Your code snippet will appear here..."></textarea>
     </div>
 
     <script>
-        function generateProductCode() {
-            const name = document.getElementById('prod-name').value.trim();
-            const price = document.getElementById('prod-price').value.trim();
-            const img = document.getElementById('prod-img').value.trim() || 'https://unsplash.com';
-            const randomId = Math.floor(Math.random() * 10000);
-
-            if(!name || !price) {
-                alert('Please fill out the Product Name and Price fields.');
-                return;
-            }
-
-            const cardCode = `<!-- Dynamic Product Card -->
-<div class="product-card" data-id="${randomId}" data-name="${name}" data-price="${price}">
-    <div class="product-img-holder">
-        <img src="${img}" alt="${name}">
-    </div>
-    <div class="product-details">
-        <h3>${name}</h3>
-        <p class="price">GH₵${parseFloat(price).toFixed(2)}</p>
-
-        <button class="add-to-cart-btn">Add To Bag</button>
-    </div>
-</div>`;
-
-            document.getElementById('code-output').innerText = cardCode;
-            document.getElementById('output-section').style.display = 'block';
-        }
-
-        function copyAdminCode() {
-            const codeText = document.getElementById('code-output').innerText;
-            navigator.clipboard.writeText(codeText).then(() => {
-                alert('Code snippet copied successfully!');
-            });
+        function makeCard() {
+            const n = document.getElementById('name').value;
+            const p = document.getElementById('price').value;
+            const i = document.getElementById('img').value || 'https://unsplash.com';
+            const id = Math.floor(Math.random() * 9999);
+            
+            if(!n || !p) { alert('Fill out name and price'); return; }
+            
+            document.getElementById('output').value = `<div class="product-card" data-id="${id}" data-name="${n}" data-price="${p}">\n  <div class="product-img-holder">\n    <img src="${i}" alt="${n}">\n  </div>\n  <div class="product-details">\n    <h3>${n}</h3>\n    <p class="price">GH₵${parseFloat(p).toFixed(2)}</p>\n    <button class="add-to-cart-btn">Add To Bag</button>\n  </div>\n</div>`;
         }
     </script>
 </body>
