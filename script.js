@@ -45,7 +45,7 @@ function addToCart(id, name, price) {
         cart.push({ id, name, price, quantity: 1 });
     }
     updateCartUI();
-    cartDrawer.classList.add('open'); // Open cart sidebar to show it was added
+    cartDrawer.classList.add('open'); 
     cartOverlay.classList.add('open');
 }
 
@@ -104,7 +104,7 @@ window.removeItem = function(id) {
     updateCartUI();
 };
 
-// FORM SUBMISSION & WHATSAPP CHAT STRING ENCODING
+// FORM SUBMISSION & WHATSAPP CHAT ROUTING
 checkoutBtn.addEventListener('click', () => {
     if (cart.length === 0) {
         alert('Please add products to your cart before checking out.');
@@ -120,7 +120,6 @@ checkoutBtn.addEventListener('click', () => {
         return;
     }
 
-    // Build the clean custom order text string
     let orderText = `✨ *NEW ORDER - SAMPANA SENSATIONS* ✨\n\n`;
     orderText += `👤 *Customer Details:* \n`;
     orderText += `• Name: ${name}\n`;
@@ -137,9 +136,7 @@ checkoutBtn.addEventListener('click', () => {
 
     orderText += `\n💰 *Total Order Cost:* GH₵${total.toFixed(2)}`;
 
-    // Encode text cleanly for the custom URL endpoint string
     const whatsappURL = `https://wa.me{encodeURIComponent(orderText)}`;
     
-    // Open standard mobile WhatsApp chat protocol window automatically
     window.open(whatsappURL, '_blank');
 });
