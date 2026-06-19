@@ -1,4 +1,4 @@
-const products = [
+const products=[
 
 {
 category:"Perfumes",
@@ -38,61 +38,51 @@ let cart=[]
 
 const shop=document.getElementById("shop")
 
+if(shop){
+
+renderProducts()
+
+}
+
 function renderProducts(){
 
 shop.innerHTML=""
 
-const groups=["Perfumes","Body Splash","Chilly"]
+const categories=[
 
-groups.forEach(group=>{
+"Perfumes",
+"Body Splash",
+"Chilly"
+
+]
+
+categories.forEach(cat=>{
 
 shop.innerHTML+=`
 
-<h2 style="grid-column:1/-1;color:#d4af37">
+<h2 class="section-title">${cat}
 
-${group}
-
-</h2>
-
-`
+</h2>`
 
 products
-.filter(p=>p.category===group)
-.forEach((p,index)=>{
+
+.filter(
+p=>p.category===cat
+)
+
+.forEach(p=>{
 
 shop.innerHTML+=`
 
-<div class="card">
+<div class="card"><img src="${p.img}"><h3>${p.name}
 
-<img src="${p.img}">
+</h3><div class="old">GH₵${p.old}
 
-<h3>
+</div><div class="price">GH₵${p.price}
 
-${p.name}
+</div><button onclick="addCart('${p.name}')">Add To Cart
 
-</h3>
-
-<div class="old">
-
-GH₵${p.old}
-
-</div>
-
-<div class="price">
-
-GH₵${p.price}
-
-</div>
-
-<button onclick="addCart(${index})">
-
-Add To Cart
-
-</button>
-
-</div>
-
-`
+</button></div>`
 
 })
 
@@ -100,59 +90,79 @@ Add To Cart
 
 }
 
-function addCart(index){
+function addCart(name){
 
-cart.push(products[index])
+const item=
 
-updateCart()
-
-alert(
-products[index].name+
-" added to cart"
+products.find(
+p=>p.name===name
 )
 
+cart.push(item)
+
+renderCart()
+
 }
 
-function updateCart(){
+function renderCart(){
+
+const items=
+
+document.getElementById(
+"cartItems"
+)
+
+const count=
+
+document.getElementById(
+"cartCount"
+)
+
+const totalBox=
+
+document.getElementById(
+"total"
+)
+
+if(!items)return
+
+items.innerHTML=""
 
 let total=0
-
-let html=""
 
 cart.forEach(item=>{
 
 total+=item.price
 
-html+=`
+items.innerHTML+=`
 
-<div>
+<div>${item.name}
 
-${item.name}
+—
 
-— GH₵${item.price}
+GH₵${item.price}
 
-</div>
-
-`
+</div>`
 
 })
 
-document.getElementById(
-"cartItems"
-).innerHTML=html
+if(count){
 
-document.getElementById(
-"cartCount"
-).innerText=
+count.innerText=
 
 cart.length+
+
 " item(s)"
 
-document.getElementById(
-"total"
-).innerText=
+}
+
+if(totalBox){
+
+totalBox.innerText=
 
 "GH₵"+total
+
+}
 
 }
 
@@ -161,7 +171,7 @@ function checkoutWhatsApp(){
 if(cart.length===0){
 
 alert(
-"Cart empty"
+"Add items to cart first"
 )
 
 return
@@ -170,41 +180,93 @@ return
 
 let total=0
 
-let msg=
+let text=
 
 "Hello Sampana Sensations%0A%0A"
 
-msg+="ORDER%0A%0A"
+text+=
 
-cart.forEach(i=>{
+"Order Details:%0A%0A"
 
-msg+=
-"• "+
-i.name+
-" — GH₵"+
-i.price+
+cart.forEach(item=>{
+
+text+=
+
+"• "
+
++ 
+
+item.name
+
++ 
+
+" — GH₵"
+
++ 
+
+item.price
+
++ 
+
 "%0A"
 
-total+=i.price
+total+=
+item.price
 
 })
 
-msg+=
-"%0ATotal: GH₵"+
+const delivery=
+
+document
+.getElementById(
+"delivery"
+)
+?.value
+||
+
+"Pickup"
+
+const payment=
+
+document
+.getElementById(
+"payment"
+)
+?.value
+||
+
+"Cash On Delivery"
+
+text+=
+
+"%0ATotal: GH₵"
+
++ 
+
 total
 
-msg+=
-"%0ADelivery: "+
-document.getElementById("delivery").value
+text+=
 
-msg+=
-"%0APayment: "+
-document.getElementById("payment").value
+"%0ADelivery: "
 
-window.location=
++ 
 
-"https://wa.me/233535556878?text="+msg
+delivery
+
+text+=
+
+"%0APayment: "
+
++ 
+
+payment
+
+window.open(
+
+"https://wa.me/233535556878?text="+text,
+
+"_blank"
+
+)
 
 }
-
-renderProducts()
