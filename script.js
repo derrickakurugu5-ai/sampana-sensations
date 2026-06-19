@@ -1,4 +1,4 @@
-const products = [
+const products=[
 
 {
 name:"Midnight Oud",
@@ -32,68 +32,75 @@ img:"https://images.unsplash.com/photo-1587017539504-67cfbddac569?w=800"
 
 let cart=[]
 
-const shop=document.querySelector("#shop")
+const shop=document.getElementById("shop")
 
-function drawProducts(){
-
-shop.innerHTML=""
-
-products.forEach((p,index)=>{
+products.forEach((p,i)=>{
 
 shop.innerHTML+=`
 
-<div class="card"><img src="${p.img}"><h3>${p.name}</h3><div class="old">
-GH₵${p.old}
-</div><div class="price">
-GH₵${p.price}
-</div><button onclick="addCart(${index})">Select Item
+<div class="card"><img src="${p.img}"><h3>${p.name}</h3><div class="old">GH₵${p.old}
+
+</div><div class="price">GH₵${p.price}
+
+</div><button onclick="addCart(${i})">Add To Cart
 
 </button></div>`
 
 })
 
+function addCart(i){
+
+cart.push(products[i])
+
+renderCart()
+
+alert(
+
+products[i].name+
+
+" added to cart"
+
+)
+
 }
 
-function addCart(index){
-
-cart.push(products[index])
-
-updateCart()
-
-}
-
-function updateCart(){
+function renderCart(){
 
 let total=0
 
-const box=
-document.getElementById(
-"cartItems"
-)
-
-box.innerHTML=""
+let list=""
 
 cart.forEach(item=>{
 
 total+=item.price
 
-box.innerHTML+=`
+list+=`
 
-<p>${item.name}
+<div>${item.name}
 
 —
 
 GH₵${item.price}
 
-</p>`
+</div>`
 
 })
 
 document.getElementById(
-"total"
-)
+"cartItems"
+).innerHTML=list
 
-.innerText=
+document.getElementById(
+"cartCount"
+).innerText=
+
+cart.length+
+
+" item(s)"
+
+document.getElementById(
+"total"
+).innerText=
 
 "GH₵"+total
 
@@ -103,25 +110,31 @@ function checkoutWhatsApp(){
 
 if(cart.length===0){
 
-alert("Select items")
+alert(
+
+"Your cart is empty"
+
+)
 
 return
 
 }
 
-let msg=
+let text=
 
-"Hello Sampana Sensations%0A%0A"
+"Hello Sampana Sensations%0A%0AOrder:%0A"
 
 let total=0
 
 cart.forEach(i=>{
 
-msg+=
+text+=
+
+"- "+
 
 i.name+
 
-" - GH₵"+
+" GH₵"+
 
 i.price+
 
@@ -131,7 +144,7 @@ total+=i.price
 
 })
 
-msg+=
+text+=
 
 "%0ATotal: GH₵"+
 
@@ -139,8 +152,6 @@ total
 
 window.location=
 
-"https://wa.me/233535556878?text="+msg
+"https://wa.me/233535556878?text="+text
 
 }
-
-drawProducts()
