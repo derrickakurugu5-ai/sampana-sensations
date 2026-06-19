@@ -111,12 +111,111 @@ function checkoutWhatsApp(){
 if(cart.length===0){
 
 alert(
-
-"Your cart is empty"
-
+"Select products first"
 )
 
 return
+
+}
+
+let total=0
+
+let text=
+
+"Hello Sampana Sensations%0A%0A"
+
+text+=
+"ORDER DETAILS%0A%0A"
+
+cart.forEach(item=>{
+
+text+=
+
+"• "
+
++ 
+
+item.name
+
++ 
+
+" — GH₵"
+
++ 
+
+item.price
+
++ 
+
+"%0A"
+
+total+=item.price
+
+})
+
+text+=
+
+"%0A"
+
+text+=
+
+"Total Amount: GH₵"
+
++ 
+
+total
+
++ 
+
+"%0A"
+
+text+=
+
+"Delivery: "
+
++ 
+
+document
+.getElementById(
+"delivery"
+)
+.value
+
++ 
+
+"%0A"
+
+text+=
+
+"Payment: "
+
++ 
+
+document
+.getElementById(
+"payment"
+)
+.value
+
++ 
+
+"%0A%0A"
+
+text+=
+
+"Customer Name:%0A"
+
+text+=
+
+"Location:%0A"
+
+window.location=
+
+"https://wa.me/233535556878?text="
+
++ 
+
+text
 
 }
 
