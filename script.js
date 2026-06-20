@@ -1,4 +1,5 @@
 const products=[
+  
   {
 
 category:"Body Spray",
@@ -12,6 +13,7 @@ price:40,
 img:"https://assets.unileversolutions.com/v1/139037182.png"
 
 },
+  
   {
 
 category:"Body Spray",
