@@ -136,17 +136,51 @@ item.price
 
 box.innerHTML+=`
 
-<div>${item.name}
+<div class="cart-row">
+
+<div class="cart-product">
+
+${item.name}
+
+<span>
 
 x${item.qty}
 
-<button onclick="minus('${item.name}')">−
+</span>
 
-</button><button onclick="plus('${item.name}')">+ 
+</div>
 
-</button><button onclick="removeItem('${item.name}')">❌
+<div class="cart-controls">
 
-</button></div>`
+<button class="qty"
+
+onclick="minus('${item.name}')">
+
+−
+
+</button>
+
+<button class="qty"
+
+onclick="plus('${item.name}')">
+
++
+
+</button>
+
+<button class="remove"
+
+onclick="removeItem('${item.name}')">
+
+×
+
+</button>
+
+</div>
+
+</div>
+
+`
 
 })
 
