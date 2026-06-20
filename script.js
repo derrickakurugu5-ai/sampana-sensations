@@ -25,6 +25,14 @@ img:"https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=800"
 },
 
 {
+category:"Body Spray",
+name:"Fresh Spray",
+old:110,
+price:85,
+img:"https://images.unsplash.com/photo-1594035910387-fea47794261f?w=800"
+},
+
+{
 category:"Chilly",
 name:"Velvet Chill",
 old:200,
@@ -36,68 +44,110 @@ img:"https://images.unsplash.com/photo-1587017539504-67cfbddac569?w=800"
 
 let cart=[]
 
-const shop=document.getElementById("shop")
+const shop=
+document.getElementById("shop")
 
-if(shop){
-
-renderProducts()
-
-}
-
-function renderProducts(){
+function showCategory(category){
 
 shop.innerHTML=""
-
-const categories=[
-
-"Perfumes",
-"Body Splash",
-"Chilly"
-
-]
-
-categories.forEach(cat=>{
-
-shop.innerHTML+=`
-
-<h2 class="section-title">${cat}
-
-</h2>`
 
 products
 
 .filter(
-p=>p.category===cat
+p=>p.category===category
 )
 
-.forEach(p=>{
+.forEach(product=>{
 
 shop.innerHTML+=`
 
-<div class="card"><img src="${p.img}"><h3>${p.name}
+<div class="card"><img src="${product.img}"><h3>${product.name}
 
-</h3><div class="old">GH₵${p.old}
+</h3><div class="old">GH₵${product.old}
 
-</div><div class="price">GH₵${p.price}
+</div><div class="price">GH₵${product.price}
 
-</div><button onclick="addCart('${p.name}')">Add To Cart
+</div><button onclick="addCart('${product.name}')">Add To Cart
 
 </button></div>`
 
 })
 
-})
-
 }
+
+showCategory(
+"Perfumes"
+)
 
 function addCart(name){
 
+const existing=
+
+cart.find(
+i=>i.name===name
+)
+
+if(existing){
+
+existing.qty++
+
+}
+
+else{
+
 const item=
+
 products.find(
 p=>p.name===name
 )
 
-cart.push(item)
+cart.push({
+
+...item,
+
+qty:1
+
+})
+
+}
+
+showToast()
+
+renderCart()
+
+}
+
+function removeItem(name){
+
+cart=
+
+cart.filter(
+i=>i.name!==name
+)
+
+renderCart()
+
+}
+
+function changeQty(name,val){
+
+const item=
+
+cart.find(
+i=>i.name===name
+)
+
+if(!item)return
+
+item.qty+=val
+
+if(item.qty<=0){
+
+removeItem(name)
+
+return
+
+}
 
 renderCart()
 
@@ -123,29 +173,37 @@ document.getElementById(
 "total"
 )
 
-if(!items)return
-
 items.innerHTML=""
 
 let total=0
 
 cart.forEach(item=>{
 
-total+=item.price
+total+=
+item.price*
+item.qty
 
 items.innerHTML+=`
 
-<div>${item.name}
+<div><b>${item.name}
 
-—
+</b><br>Qty:
 
-GH₵${item.price}
+<button onclick="changeQty('${item.name}',-1)">−</button>
 
-</div>`
+${item.qty}
+
+<button onclick="changeQty('${item.name}',1)">+</button>
+
+<br>GH₵
+
+${item.price*item.qty}
+
+<button onclick="removeItem('${item.name}')">❌
+
+</button></div>`
 
 })
-
-if(count){
 
 count.innerText=
 
@@ -153,43 +211,41 @@ cart.length+
 
 " item(s)"
 
-}
-
-if(totalBox){
-
 totalBox.innerText=
 
-"GH₵"+total
+"GH₵"+
 
-}
+total
 
 }
 
 function checkoutWhatsApp(){
 
-if(cart.length===0){
+if(
+cart.length===0
+){
 
 alert(
-"Add items to cart first"
+"Cart empty"
 )
 
 return
 
 }
 
-let total=0
-
-let text=
+let msg=
 
 "Hello Sampana Sensations%0A%0A"
 
-text+=
+msg+=
 
-"Order Details:%0A%0A"
+"ORDER:%0A%0A"
+
+let total=0
 
 cart.forEach(item=>{
 
-text+=
+msg+=
 
 "• "
 
@@ -199,44 +255,33 @@ item.name
 
 + 
 
+" ×"
+
++ 
+
+item.qty
+
++ 
+
 " — GH₵"
 
 + 
 
-item.price
+item.price*
+item.qty
 
 + 
 
 "%0A"
 
 total+=
-item.price
+
+item.price*
+item.qty
 
 })
 
-const delivery=
-
-document
-.getElementById(
-"delivery"
-)
-?.value
-||
-
-"Pickup"
-
-const payment=
-
-document
-.getElementById(
-"payment"
-)
-?.value
-||
-
-"Cash On Delivery"
-
-text+=
+msg+=
 
 "%0ATotal: GH₵"
 
@@ -244,28 +289,62 @@ text+=
 
 total
 
-text+=
+msg+=
 
 "%0ADelivery: "
 
 + 
 
-delivery
+document
+.getElementById(
+"delivery"
+)
+.value
 
-text+=
+msg+=
 
 "%0APayment: "
 
 + 
 
-payment
+document
+.getElementById(
+"payment"
+)
+.value
 
 window.open(
 
-"https://wa.me/233535556878?text="+text,
+"https://wa.me/233535556878?text="+msg,
 
 "_blank"
 
+)
+
+}
+
+function showToast(){
+
+const toast=
+
+document.createElement(
+"div"
+)
+
+toast.innerText=
+
+"✓ Added to Cart"
+
+toast.style=
+"position:fixed;bottom:20px;right:20px;background:#d4af37;color:black;padding:12px;border-radius:12px"
+
+document.body.appendChild(
+toast
+)
+
+setTimeout(
+()=>toast.remove(),
+1800
 )
 
 }
