@@ -472,23 +472,73 @@ border-radius:16px;
 
 #cartItems button{
 
-width:26px;
+width:34px;
 
-height:26px;
+height:34px;
 
 border:none;
 
 border-radius:50%;
 
-background:#1d1d1d;
+background:#161616;
 
 color:#d4af37;
 
-font-size:14px;
+font-size:18px;
 
-font-weight:bold;
+font-weight:700;
 
-margin-left:6px;
+margin-left:4px;
+
+display:inline-flex;
+
+align-items:center;
+
+justify-content:center;
+
+}
+
+
+
+#cartItems button:hover{
+
+background:#d4af37;
+
+color:black;
+
+}
+
+
+
+#cartItems div{
+
+display:grid;
+
+grid-template-columns:1fr auto auto auto;
+
+align-items:center;
+
+gap:10px;
+
+}
+
+
+
+#cartItems div button:last-child{
+
+background:#2b1111;
+
+color:#ff5b5b;
+
+}
+
+
+
+#cartItems div button:last-child:hover{
+
+background:#ff5b5b;
+
+color:white;
 
 }
 
