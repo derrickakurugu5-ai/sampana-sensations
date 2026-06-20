@@ -216,57 +216,139 @@ renderCart()
 
 function checkoutWhatsApp(){
 
-if(
-cart.length===0
-){
+if(cart.length===0){
 
-alert(
-"Cart empty"
-)
+alert("Cart empty")
 
 return
 
 }
 
+let total=0
+
+let delivery=
+
+document
+.getElementById("delivery")
+?.value
+
+||
+
+"Pickup"
+
+
+
+let payment=
+
+document
+.getElementById("payment")
+?.value
+
+||
+
+"Cash On Delivery"
+
+
+
 let msg=
 
 "Hello Sampana Sensations%0A%0A"
 
-let total=0
+msg+=
+"ORDER DETAILS%0A%0A"
 
-cart.forEach(i=>{
+
+
+cart.forEach(item=>{
+
+let amount=
+
+item.price*
+item.qty
+
+total+=amount
+
+
 
 msg+=
 
-i.name+
+"• "
 
-" x"+
++
 
-i.qty+
+item.name
 
-" GH₵"+
++
 
-i.qty*
-i.price+
+" ×"
+
++
+
+item.qty
+
++
+
+" — GH₵"
+
++
+
+amount
+
++
 
 "%0A"
 
-total+=
-
-i.qty*
-i.price
-
 })
+
+
 
 msg+=
 
-"%0ATotal GH₵"+
+"%0A━━━━━━━━━━"
+
+
+
+msg+=
+
+"%0ATotal: GH₵"
+
++
 
 total
 
+
+
+msg+=
+
+"%0ADelivery: "
+
++
+
+delivery
+
+
+
+msg+=
+
+"%0APayment: "
+
++
+
+payment
+
+
+
+msg+=
+
+"%0A%0AThank you."
+
+
+
 window.open(
 
-"https://wa.me/233535556878?text="+msg
+"https://wa.me/233535556878?text="+msg,
+
+"_blank"
 
 )
 
