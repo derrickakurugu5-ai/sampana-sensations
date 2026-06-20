@@ -3,6 +3,19 @@ const products=[
 
 category:"Body Spray",
 
+name:"Dove Deodorant spray ",
+
+old:50,
+
+price:40,
+
+img:"https://assets.unileversolutions.com/v1/139037182.png"
+
+},
+  {
+
+category:"Body Spray",
+
 name:"Right Guard ",
 
 old:57,
