@@ -1,4 +1,4 @@
-const matches=[
+const games=[
 
 "Barcelona vs Chelsea",
 
@@ -10,26 +10,28 @@ const matches=[
 
 ]
 
-const box=
+const matches=
 
 document.getElementById(
 "matches"
 )
 
-matches.forEach(m=>{
+games.forEach(game=>{
 
-box.innerHTML+=`
+matches.innerHTML+=`
 
 <div class="match">
 
-${m}
+<h3>
 
-<br><br>
+${game}
+
+</h3>
 
 <button
-onclick="analyze('${m}')">
+onclick="analyze('${game}')">
 
-Analyze
+View Statistics
 
 </button>
 
@@ -41,14 +43,15 @@ Analyze
 
 function sport(name){
 
-alert(
-name+
-" selected"
-)
+document.getElementById(
+"suggestions"
+).innerHTML=
+
+"Selected: "+name
 
 }
 
-function analyze(match){
+function analyze(game){
 
 document.getElementById(
 "suggestions"
@@ -58,38 +61,28 @@ document.getElementById(
 
 <h3>
 
-${match}
+${game}
 
 </h3>
 
-<p>
+<br>
 
-Over 1.5
+Over 1.5 → Higher
 
-→ Higher
+<br><br>
 
-</p>
+BTTS → Medium
 
-<p>
+<br><br>
 
-BTTS
+Winner → Balanced
 
-→ Medium
-
-</p>
-
-<p>
-
-Winner
-
-→ Balanced
-
-</p>
+<br><br>
 
 <button
-onclick="save('${match}')">
+onclick="save('${game}')">
 
-Save Pick
+Add To Slip
 
 </button>
 
@@ -97,12 +90,16 @@ Save Pick
 
 }
 
-function save(match){
+function save(game){
 
 document.getElementById(
 "slip"
 ).innerHTML+=
 
-"<div>✓ "+match+"</div>"
+`<div>
+
+✓ ${game}
+
+</div>`
 
 }
